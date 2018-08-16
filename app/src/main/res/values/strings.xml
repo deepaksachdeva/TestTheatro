@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">MovieTheatro</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_main2">Main2Activity</string>
+    <string name="movie_poster">Movie Poster</string>
+    <string name="search_name_of_movie">Search name of movie</string>
+    <string name="title_activity_movie_detail">MovieDetailActivity</string>
+    <string name="movie_title">Movie Title</string>
+    <string name="colon">:</string>
+    <string name="released">Released</string>
+    <string name="genre">Genre</string>
+    <string name="director">Director</string>
+    <string name="writer">Writer</string>
+    <string name="actors">Actors</string>
+    <string name="plot">Plot</string>
+    <string name="language">Language</string>
+    <string name="awards">Awards</string>
+    <string name="country">Country</string>
+    <string name="meta_score">Meta Score</string>
+    <string name="imdb_rating">Imdb Rating</string>
+    <string name="imdb_votes">Imdb Votes</string>
+    <string name="type">Type</string>
+    <string name="dvd">DVD</string>
+    <string name="box_office">Box office</string>
+    <string name="production">Production</string>
+    <string name="website">Website</string>
+    <string name="rated">Rated</string>
+    <string name="run_time">Run Time</string>
+</resources>
