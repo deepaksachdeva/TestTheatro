@@ -13,6 +13,7 @@ import com.deepak.movietheatro.databinding.ActivityDetailBinding;
 import com.deepak.movietheatro.listeners.IResponseListener;
 import com.deepak.movietheatro.models.MovieResponse;
 import com.deepak.movietheatro.utils.Constants;
+import com.deepak.movietheatro.utils.NetworkUtils;
 
 /**
  * To display detail of Movie
@@ -38,9 +39,11 @@ public class MovieDetailActivity extends AppCompatActivity implements IResponseL
         if(bundle!= null) {
             imbdId = bundle.getString(Constants.IMDB_ID);
         }
-        NetworkController networkController = new NetworkController();
-        // call Api to get detail of movie
-        networkController.getMovieDetails(this, imbdId, Constants.API_KEY);
+        if(NetworkUtils.isNetworkConnected(getApplicationContext())) {
+            NetworkController networkController = new NetworkController();
+            // call Api to get detail of movie
+            networkController.getMovieDetails(this, imbdId, Constants.API_KEY);
+        }
     }
 
     /**

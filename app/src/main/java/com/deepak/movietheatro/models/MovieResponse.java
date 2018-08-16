@@ -82,6 +82,9 @@ public class MovieResponse {
     @SerializedName("Response")
     @Expose
     private String response;
+    @SerializedName("Error")
+    @Expose
+    private String Error;
 
     public String getTitle() {
         return title;
@@ -283,6 +286,21 @@ public class MovieResponse {
         this.response = response;
     }
 
+    public String getdVD() {
+        return dVD;
+    }
+
+    public void setdVD(String dVD) {
+        this.dVD = dVD;
+    }
+
+    public String getError() {
+        return Error;
+    }
+
+    public void setError(String error) {
+        Error = error;
+    }
 }
 
 

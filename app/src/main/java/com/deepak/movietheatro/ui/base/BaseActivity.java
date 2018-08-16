@@ -68,9 +68,6 @@ public abstract class BaseActivity<T extends ViewDataBinding, V extends BaseView
         }
     }
 
-    public boolean isNetworkConnected() {
-        return NetworkUtils.isNetworkConnected(getApplicationContext());
-    }
     public void performDependencyInjection() {
         AndroidInjection.inject(this);
     }

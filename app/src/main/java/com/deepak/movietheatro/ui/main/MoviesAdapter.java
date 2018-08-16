@@ -2,14 +2,17 @@ package com.deepak.movietheatro.ui.main;
 
 import android.content.Context;
 import android.content.Intent;
+import android.databinding.BindingAdapter;
+import android.databinding.DataBindingUtil;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
+import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.deepak.movietheatro.R;
+import com.deepak.movietheatro.databinding.MovieListRowBinding;
 import com.deepak.movietheatro.models.MovieResponse;
 import com.deepak.movietheatro.ui.detail.MovieDetailActivity;
 import com.deepak.movietheatro.utils.Constants;
@@ -24,6 +27,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<MovieViewHolder> impleme
 
     private MovieResponse movieResponse;
     private Context context;
+    private LayoutInflater layoutInflater;
 
     MoviesAdapter(Context context, MovieResponse movieResponse) {
         this.movieResponse = movieResponse;
@@ -33,32 +37,37 @@ public class MoviesAdapter extends RecyclerView.Adapter<MovieViewHolder> impleme
     @NonNull
     @Override
     public MovieViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.movie_list_row, parent, false);
-        itemView.setOnClickListener(this);
+        if (layoutInflater == null) {
+            layoutInflater = LayoutInflater.from(parent.getContext());
+        }
+        MovieListRowBinding movieListRowBinding = DataBindingUtil.inflate(layoutInflater,
+                R.layout.movie_list_row, parent, false);
 
-        return new MovieViewHolder(itemView);
+        return new MovieViewHolder(movieListRowBinding);
     }
 
     @Override
     public void onBindViewHolder(@NonNull MovieViewHolder holder, int position) {
         if (movieResponse != null) {
-            holder.tvTitle.setText(movieResponse.getTitle());
-            holder.tvReleased.setText(movieResponse.getReleased());
-            holder.tvDirector.setText(movieResponse.getDirector());
-            holder.tvLanguage.setText(movieResponse.getLanguage());
-            holder.tvCountry.setText(movieResponse.getCountry());
-            Glide.with(context)
-                    .load(movieResponse.getPoster())
-                    .thumbnail(0.5f)
-                    .into(holder.imgPoster);
-            holder.linParent.setOnClickListener(this);
+            holder.movieListRowBinding.setMovieResponse(movieResponse);
+            holder.movieListRowBinding.linParent.setOnClickListener(this);
         }
+    }
+
+    @BindingAdapter({Constants.MOVIE_POSTER})
+    public static void loadImage(ImageView view, String imageUrl) {
+        Glide.with(view.getContext())
+                .load(imageUrl)
+                .into(view);
     }
 
     @Override
     public int getItemCount() {
-        return 1;
+        if(movieResponse.getResponse().equalsIgnoreCase("True")){
+            return 1;
+        }else{
+            return 0;
+        }
     }
 
     @Override
